@@ -43,7 +43,7 @@ export default {
     },
     getJSONFromScrape (url) {
       this.linksArray = []
-      let path = 'http://localhost:5000/' + url
+      let path = 'http://ubuntu@52.27.159.135:5000/' + url
       console.log('url',url)
       axios.get(path)
       .then(response => {
