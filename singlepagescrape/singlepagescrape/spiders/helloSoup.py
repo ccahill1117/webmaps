@@ -5,9 +5,9 @@ from scraping import scrape
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return jsonify(Links=scrape())
+@app.route('/<var>', methods=['GET'])
+def index(var):
+    return jsonify(Links=scrape(var))
 
 
 if __name__ == "__main__":

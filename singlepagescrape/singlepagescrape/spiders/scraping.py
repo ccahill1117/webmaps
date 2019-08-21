@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def scrape():
+def scrape(url):
     l = []
-    base_url = 'https://www.achewood.com'
+    base_url = 'https://www.' + url + '.com'
     print(base_url)
 
     # Request URL and Beautiful Parser
