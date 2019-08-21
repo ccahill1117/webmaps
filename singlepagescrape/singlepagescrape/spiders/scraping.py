@@ -20,7 +20,7 @@ def scrape(url):
     for item in all_links:
         d = {}
         link = item.attrs['href']
-        d[num] = link
+        d['url'] = link
         num = num + 1
 
         # CTC - uncomment below if you want to print every URL to console

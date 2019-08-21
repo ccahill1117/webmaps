@@ -1,9 +1,12 @@
 from flask import Flask
 from flask import jsonify
 from scraping import scrape
+from flask_cors import CORS
+
 
 app = Flask(__name__)
 
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/<var>', methods=['GET'])
 def index(var):
