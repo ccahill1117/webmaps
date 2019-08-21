@@ -4,7 +4,7 @@ import requests
 
 def scrape(url):
     l = []
-    base_url = 'https://www.' + url + '.com'
+    base_url = 'https://www.' + url 
     print(base_url)
 
     # Request URL and Beautiful Parser
