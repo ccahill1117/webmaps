@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 
-
 def scrape(url):
     l = []
     base_url = 'https://www.' + url 
@@ -20,7 +19,13 @@ def scrape(url):
     for item in all_links:
         d = {}
         link = item.attrs['href']
-        d['url'] = link
+        if link[0] == '/':
+          link = base_url + link
+        d['id'] = num
+        d['category'] = url
+        d['name'] = link
+        d['value'] = num
+        d['label'] = link
         num = num + 1
 
         # CTC - uncomment below if you want to print every URL to console
