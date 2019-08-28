@@ -16,22 +16,31 @@
           {{ link.url }}
         </li>
       </ol>  
-    </div>        
+    </div>
+    <div ref="chart" class="chart" style="width: 600px;height:400px;"></div>
   </div>
 </template>
-
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-
 import axios from 'axios'
+import echarts from 'echarts'
+require('echarts/lib/chart/bar')
+// include tooltip and title component
+require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
+
+
 
 export default {
   name: 'home',
   data() {
     return {
       url: '',
-      linksArray: []
+      linksArray: [],
+      // myChart: echarts.init(document.getElementById('main')),
+      // chart: {},
+      
     }
   },
   components: {
@@ -54,6 +63,38 @@ export default {
         console.log(error)
       })
     }
-  } 
+  }, 
+  mounted: function () {  
+    // init echarts
+    var myChart = echarts.init(this.$refs['chart']);
+    console.log('mychart',myChart)
+    
+        // based on prepared DOM, initialize echarts instance
+        // var myChart = echarts.init(document.getElementById('chart'));
+
+        // specify chart configuration item and data
+        var option = {
+            title: {
+                text: 'ECharts entry example'
+            },
+            tooltip: {},
+            legend: {
+                data:['Sales']
+            },
+            xAxis: {
+                data: ["shirt","cardign","chiffon shirt","pants","heels","socks"]
+            },
+            yAxis: {},
+            series: [{
+                name: 'Sales',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // use configuration item and data specified to show chart
+        myChart.setOption(option)
+
+  }
 }
 </script>
