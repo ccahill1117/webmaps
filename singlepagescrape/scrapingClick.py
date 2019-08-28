@@ -1,14 +1,11 @@
 from bs4 import BeautifulSoup
 import requests
-import re
 
-def linkMinus(fullUrl):
-  url = fullUrl.replace("https://www.","")
-  return url
-
-def scrape(url):
+def scrapeClick(url):
     l = []
     base_url = 'https://www.' + url 
+    # base_url = url 
+
     print(base_url)
 
     # Request URL and Beautiful Parser
@@ -31,7 +28,7 @@ def scrape(url):
         d['name'] = link
         d['value'] = num
         d['label'] = link
-        d['linkMinus'] = linkMinus(link)
+        d['linkMinus'] = url
         num = num + 1
 
         # CTC - uncomment below if you want to print every URL to console
