@@ -22,7 +22,20 @@ def scrape(data):
     all_links = soup.find_all('a', href=True)
     print(len(all_links))
 
-    num = 0
+    num = 0 
+    
+    # create initial starting point
+    initSite = {}
+    initSite['id'] = 0
+    initSite['category'] = url
+    initSite['name'] = url
+    initSite['value'] = num
+    initSite['label'] = url
+    initSite['linkMinus'] = url
+
+    l.append(initSite)
+
+    num = 1
 
     for item in all_links:
         d = {}
@@ -34,7 +47,7 @@ def scrape(data):
         d['name'] = link
         d['value'] = num
         d['label'] = link
-        d['linkMinus'] = linkMinus(link)
+        # d['linkMinus'] = linkMinus(link)
         num = num + 1
 
         # CTC - uncomment below if you want to print every URL to console

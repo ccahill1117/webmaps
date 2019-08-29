@@ -18,6 +18,7 @@ def scrapeClick(url):
 
     num = 0
 
+  
     for item in all_links:
         d = {}
         link = item.attrs['href']

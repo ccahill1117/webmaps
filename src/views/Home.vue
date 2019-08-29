@@ -54,6 +54,14 @@ export default {
     },
 
     getJSONFromScrape (url) {
+      // let originPoint = {}
+      // let originLink = "https://www." + url    
+      // originPoint["id"] = 0
+      // originPoint["category"] = url
+      // originPoint["name"] = originLink
+      // originPoint["num"] = 0
+      // originPoint["label"] = originLink 
+      // originPoint["value"] = 0
       this.linksArray = []
       let path = 'http://localhost:5000/links'
       axios.post(path, {
@@ -67,15 +75,13 @@ export default {
       })
       .then(response => {
         this.linksArray = response.data.Links
+        // this.linksArray.push(originPoint)
         console.log(response.data.Links)
         this.updateChart(response.data.Links, url)
       })
       .catch(error => {
         console.log(error)
       })  
-    
-
-
     },
   
   updateChart(urls, url) {
