@@ -56,11 +56,13 @@ export default {
     getJSONFromScrape (url) {
       this.linksArray = []
       let path = 'http://localhost:5000/links'
-      // let path = 'http://ubuntu@52.27.159.135:5000/' + url
-      console.log('url',url)
-      axios.get(path, {
+      axios.post(path, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': "*",
+        },
         params: {
-          destination: url 
+          links: url
         }
       })
       .then(response => {
@@ -70,8 +72,11 @@ export default {
       })
       .catch(error => {
         console.log(error)
-      })      
-  },
+      })  
+    
+
+
+    },
   
   updateChart(urls, url) {
     var myChart = echarts.init(this.$refs['chart']);
