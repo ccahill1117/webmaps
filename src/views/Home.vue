@@ -8,14 +8,12 @@
     </div>
     <div class="row">
       <button @click=getJSONFromScrape(url)>Scrape site</button>
-      <button @click ></button>
-      <!-- <button @click=justChecking(url)>Scrape site</button> -->
     </div>
-    <div class="row">
-
+    
+      
         <div ref="chart" class="chart" id="theChart"></div>
-
-    </div>
+      
+    
     <!-- <div class="row">
       <ol v-if="linksArray.length > 0">
         <li v-for="link in linksArray">
@@ -178,10 +176,13 @@ export default {
 }
 
 #theChart {
-  width: 1200px;
-  height:1200px;
+  height:700px;
+  position: relative;
+  border: solid;
 }
 
-
+canvas{
+  margin: 0 auto;
+}
 
 </style>
