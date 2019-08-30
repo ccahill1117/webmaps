@@ -7,7 +7,8 @@ def linkMinus(fullUrl):
   return url
 
 def scrape(data):
-    l = []
+    links = []
+    connects = []
     params = data['params']
     url = params['links']
     print(data)
@@ -23,40 +24,48 @@ def scrape(data):
     print(len(all_links))
 
     num = 0 
-    
+
     # create initial starting point
     initSite = {}
-    initSite['id'] = 0
-    initSite['category'] = url
+    initSite['id'] = num
+    initSite['category'] = 'a'
     initSite['name'] = url
-    initSite['value'] = num
-    initSite['label'] = url
-    initSite['linkMinus'] = url
+    initSite['value'] = 0
+    # initSite['label'] = url
+    # initSite['linkMinus'] = url
 
-    l.append(initSite)
+    links.append(initSite)
 
     num = 1
 
     for item in all_links:
         d = {}
         link = item.attrs['href']
+        shortLink = link[-10:]
         if link[0] == '/':
           link = base_url + link
         d['id'] = num
-        d['category'] = url
-        d['name'] = link
+        d['category'] = 'a'
+        d['name'] = shortLink
         d['value'] = num
-        d['label'] = link
-        # d['linkMinus'] = linkMinus(link)
+        # d['label'] = link
+
+        # CTC append each link object 'd' to links array
+        links.append(d)
+
+        # CTC append each connection 'c' to connects array
+        c = {}
+        c['source'] = 0
+        c['target'] = num
+        c['weight'] = 2
+        connects.append(c)
         num = num + 1
 
-        # CTC - uncomment below if you want to print every URL to console
-        # print(link)
-
-        l.append(d)
-
-    return l
-    # return data
+    dataReturn = {}
+    dataReturn['links'] = links
+    dataReturn['connects'] = connects
+    return dataReturn
+   
 
 
 if __name__ == "__main__":

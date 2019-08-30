@@ -9,18 +9,8 @@
     <div class="row">
       <button @click=getJSONFromScrape(url)>Scrape site</button>
     </div>
-    
-      
-        <div ref="chart" class="chart" id="theChart"></div>
-      
-    
-    <!-- <div class="row">
-      <ol v-if="linksArray.length > 0">
-        <li v-for="link in linksArray">
-          {{ link.name }}
-        </li>
-      </ol>  
-    </div> -->
+      <div ref="chart" class="chart" id="theChart">
+      </div>
   </div>
 </template>
 <script>
@@ -40,9 +30,6 @@ export default {
     return {
       url: 'hello.com',
       linksArray: [],
-      // myChart: echarts.init(document.getElementById('main')),
-      // chart: {},
-      
     }
   },
   components: {
@@ -54,14 +41,6 @@ export default {
     },
 
     getJSONFromScrape (url) {
-      // let originPoint = {}
-      // let originLink = "https://www." + url    
-      // originPoint["id"] = 0
-      // originPoint["category"] = url
-      // originPoint["name"] = originLink
-      // originPoint["num"] = 0
-      // originPoint["label"] = originLink 
-      // originPoint["value"] = 0
       this.linksArray = []
       let path = 'http://localhost:5000/links'
       axios.post(path, {
@@ -76,31 +55,16 @@ export default {
       .then(response => {
         this.linksArray = response.data.Links
         // this.linksArray.push(originPoint)
-        console.log(response.data.Links)
-        this.updateChart(response.data.Links, url)
+        // console.log('dataBack',response.data)
+        this.updateChart(response.data.Links.links, response.data.Links.connects, url)
       })
       .catch(error => {
         console.log(error)
       })  
     },
   
-  updateChart(urls, url) {
+  updateChart(urls, links, url) {
     var myChart = echarts.init(this.$refs['chart']);
-    console.log('urls',urls)
-    // let links = []
-    // urls.forEach(function(link) {
-    //   links.push(link)
-    // })
-    // console.log('links in array',links)
-
-    urls.forEach(function(node) {
-      node.itemStyle = null;
-      node.symbolSize = 20;
-      // Use random x, y
-      node.x = node.y = null;
-      node.draggable = true;
-    })
-    
     var option = {        
       title : {
           text: 'hi',
@@ -109,8 +73,8 @@ export default {
           y:'bottom'
       },
       tooltip : {
-          trigger: 'item',
-          formatter: '{a} : {b}'
+          // trigger: 'item',
+          // formatter: '{a} : {b}'
       },
       toolbox: {
           show : true,
@@ -130,7 +94,8 @@ export default {
               name : "experiment graph",
               categories : [
                   {
-                      name: url
+                      // name: url
+                      name: 'a'
                   },                  
               ],
               itemStyle: {
@@ -138,7 +103,7 @@ export default {
                       label: {
                           show: true,
                           textStyle: {
-                              color: 'rgba(0,0,0,1)'
+                              color: '#333'
                           }
                       },
                       linkStyle: {
@@ -148,32 +113,49 @@ export default {
                   emphasis: {
                       label: {
                           show: false
-                          // textStyle: null      // 默认使用全局文本样式，详见TEXTSTYLE
                       },
                       nodeStyle : {
-                          // r: 30
+                          r: 30
                       },
-                      linkStyle : {}
+                      lineStyle: {
+                        normal: {
+                            color: 'source',
+                            curveness: 0.3
+                        }
+                    }
                   }
               },
+              force: {
+                    repulsion: 30
+              },
               // useWorker: false,
-              // minRadius : 35,
-              // maxRadius : 45,
-              // gravity: 1.1,
-              // scaling: 3.1,
-              // roam: 'move',
+              minRadius : 55,
+              maxRadius : 45,
+              gravity: 1.1,
+              scaling: 3.1,
+              roam: 'move',
               data: urls,
-              links: [
-                // {source : '丽萨-乔布斯', target : '乔布斯', weight : 1, name: '女儿'},
+              // data: [
+              //   {category:'a', name: 'hi', value : 10, label:'thing'},
+              //   {category:'a', name: 'yo',value : 10},
+              //   {category:'a', name: 'b',value : 10},
+              // ],
+              links: links
+              // links: [
+                // {source : 'hi', target : 'yo', weight : 100},
+                // {source : 'hi', target : 'b', weight : 100},
+              // {source : 'hello.com', target : 'https://www.hello.com/en/episodes/index.html', weight : 100}
 
-              ]
+              // ],
           }
       ]
     };
     
     var myChart = echarts.init(this.$refs['chart']);
     myChart.setOption(option)
-    console.log('option in thing',option.series[0].nodes)
+    console.log('data',option.series[0].nodes)
+    console.log('links',option.series[0].links)
+
     }
   },
 
@@ -191,7 +173,7 @@ export default {
 }
 
 #theChart {
-  height:700px;
+  height:800px;
   position: relative;
   border: solid;
 }
