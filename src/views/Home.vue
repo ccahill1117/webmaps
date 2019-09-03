@@ -38,7 +38,7 @@ export default {
 
     getJSONFromScrape (url) {
       this.linksArray = []
-      let path = 'http://ubuntu@52.27.159.135:5000/'
+      let path = 'http://ubuntu@52.27.159.135:5000/links'
       axios.post(path, {
         headers: {
           'Content-Type': 'application/json',
