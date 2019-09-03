@@ -41,14 +41,13 @@ def scrape(data):
     for item in all_links:
         d = {}
         link = item.attrs['href']
-        shortLink = link[-10:]
         if link[0] == '/':
-          link = base_url + link
+          fullLink = base_url + link
         d['id'] = num
         d['category'] = 'a'
-        d['name'] = shortLink
+        d['name'] = link
         d['value'] = num
-        # d['label'] = link
+        d['fullLink'] = fullLink
 
         # CTC append each link object 'd' to links array
         links.append(d)

@@ -14,8 +14,11 @@
   </div>
 </template>
 <script>
+
 import axios from 'axios'
 import echarts from 'echarts'
+import { options } from '@/chartOptions'
+
 require('echarts/lib/chart/bar')
 // include tooltip and title component
 require('echarts/lib/component/tooltip')
@@ -28,6 +31,7 @@ export default {
     return {
       url: 'hello.com',
       linksArray: [],
+      // chartOptions: options
     }
   },
  
@@ -38,7 +42,8 @@ export default {
 
     getJSONFromScrape (url) {
       this.linksArray = []
-      let path = 'http://ubuntu@52.27.159.135:5000/links'
+      // let path = 'http://ubuntu@52.27.159.135:5000/links'
+      let path = 'http://localhost:5000/links'
       axios.post(path, {
         headers: {
           'Content-Type': 'application/json',
@@ -50,8 +55,6 @@ export default {
       })
       .then(response => {
         this.linksArray = response.data.Links
-        // this.linksArray.push(originPoint)
-        // console.log('dataBack',response.data)
         this.updateChart(response.data.Links.links, response.data.Links.connects, url)
       })
       .catch(error => {
@@ -60,10 +63,11 @@ export default {
     },
   
   updateChart(urls, links, url) {
-    var myChart = echarts.init(this.$refs['chart']);
+    var myChart = echarts.init(this.$refs['chart'])
+    
     var option = {        
       title : {
-          text: 'hi',
+          text: 'Webpage Maps',
           subtext: 'subtext',
           x:'right',
           y:'bottom'
@@ -145,10 +149,15 @@ export default {
               
           }
       ]
-    };
+    }
     
     var myChart = echarts.init(this.$refs['chart']);
     myChart.setOption(option)
+    myChart.on('click', function() {
+      console.log('hi')
+    })
+
+
     console.log('data',option.series[0].nodes)
     console.log('links',option.series[0].links)
 
@@ -157,6 +166,7 @@ export default {
 
   mounted: function () {  
     // init echarts
+    this.getJSONFromScrape('hello.com')
     
   }
 }
