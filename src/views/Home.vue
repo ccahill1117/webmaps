@@ -131,11 +131,7 @@ export default {
               scaling: 3.1,
               roam: 'move',
               data: urls,
-              // data: [
-              //   {category:'a', name: 'hi', value : 10, label:'thing'},
-              //   {category:'a', name: 'yo',value : 10},
-              //   {category:'a', name: 'b',value : 10},
-              // ],
+              
               links: links,
               lineStyle: {
                 normal: {
@@ -144,13 +140,9 @@ export default {
                     curveness: 0,
                 }
               },
-              symbolSize : 5
-              // links: [
-                // {source : 'hi', target : 'yo', weight : 100},
-                // {source : 'hi', target : 'b', weight : 100},
-              // {source : 'hello.com', target : 'https://www.hello.com/en/episodes/index.html', weight : 100}
-
-              // ],
+              symbolSize : 5,
+              edgeSymbol: ['circle', 'arrow'],
+              
           }
       ]
     };
