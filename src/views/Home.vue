@@ -122,7 +122,7 @@ export default {
                   }
               },
               force: {
-                    repulsion: 500
+                    repulsion: 300
               },
               // useWorker: false,
               minRadius : 55,

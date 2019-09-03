@@ -55,20 +55,11 @@ def scrape(data):
 
         # CTC append each connection 'c' to connects array
         c = {}
-        normalStyle = { 'normal' : { 'color': 'red',
-                          'width' : '3.5'
-        }}
-        labelItem = { 'normal' : { 'show' : True ,
-                                  'width' : '3.5'
-        
-        
-        } }
+     
 
         c['source'] = 0
         c['target'] = num
         c['weight'] = 2
-        c['lineStyle'] = labelItem
-        # c['label'] = labelItem
         connects.append(c)
         num = num + 1
 
