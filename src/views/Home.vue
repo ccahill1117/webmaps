@@ -14,8 +14,6 @@
   </div>
 </template>
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
 import echarts from 'echarts'
 require('echarts/lib/chart/bar')
@@ -32,9 +30,7 @@ export default {
       linksArray: [],
     }
   },
-  components: {
-    HelloWorld
-  },
+ 
   methods: {
     justChecking(url) {
       console.log('hi',url)
@@ -126,7 +122,7 @@ export default {
                   }
               },
               force: {
-                    repulsion: 30
+                    repulsion: 500
               },
               // useWorker: false,
               minRadius : 55,
@@ -140,7 +136,15 @@ export default {
               //   {category:'a', name: 'yo',value : 10},
               //   {category:'a', name: 'b',value : 10},
               // ],
-              links: links
+              links: links,
+              lineStyle: {
+                normal: {
+                    opacity: 0.9,
+                    width: 2,
+                    curveness: 0,
+                }
+              },
+              symbolSize : 5
               // links: [
                 // {source : 'hi', target : 'yo', weight : 100},
                 // {source : 'hi', target : 'b', weight : 100},
