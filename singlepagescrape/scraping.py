@@ -17,9 +17,7 @@ def scrape(data):
 
     # Request URL and Beautiful Parser
     html = requests.get(base_url)
-
     soup = BeautifulSoup(html.text, 'html.parser')
-
     all_links = soup.find_all('a', href=True)
     print(len(all_links))
 
@@ -41,13 +39,13 @@ def scrape(data):
     for item in all_links:
         d = {}
         link = item.attrs['href']
-        if link[0] == '/':
-          fullLink = base_url + link
+        # if link[0] == '/':
+          # fullLink = base_url + link
         d['id'] = num
         d['category'] = 'a'
         d['name'] = link
         d['value'] = num
-        d['fullLink'] = fullLink
+        # d['fullLink'] = fullLink
 
         # CTC append each link object 'd' to links array
         links.append(d)

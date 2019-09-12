@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <div class="row">
-      <label for="input">if you want to scrape https://www.nytimes.com, just type 'nytimes.com'</label>
+      <h2>This web application will return a list of anchor tags based on the URL entered, in the visualization below!</h2>
+    </div>
+    <div class="row">
+      <label for="input">if you want to scrape https://www.nytimes.com, type 'nytimes.com'</label>
     </div>
     <div class="row">
       <input type="text" v-model='url'>
@@ -63,8 +66,7 @@ export default {
     },
   
   updateChart(urls, links, url) {
-    var myChart = echarts.init(this.$refs['chart'])
-    
+    var myChart = echarts.init(this.$refs['chart'])    
     var option = {        
       title : {
           text: 'Webpage Maps',
@@ -166,7 +168,7 @@ export default {
 
   mounted: function () {  
     // init echarts
-    this.getJSONFromScrape('hello.com')
+    // this.getJSONFromScrape('hello.com')
     
   }
 }
